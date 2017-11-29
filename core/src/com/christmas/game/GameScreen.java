@@ -9,11 +9,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameScreen extends ScreenAdapter{
 	private ChristmasBreaker christmasBreaker;
 	private Bauble bauble;
-	private Texture img;
+	private Texture baubleImg;
+	private Texture paddleImg;
+	private Paddle paddle;
 	public GameScreen(ChristmasBreaker christmasBreaker) {
 		this.christmasBreaker = christmasBreaker;
-		img = new Texture("bauble.png");
+		baubleImg = new Texture("bauble.png");
 		bauble = new Bauble(100,50);
+		
+		paddleImg = new Texture("paddle.png");
+		paddle = new Paddle(300,20);
 	}
 	private void update(float delta) {
 		bauble.update(delta);
@@ -25,7 +30,8 @@ public class GameScreen extends ScreenAdapter{
         SpriteBatch batch = christmasBreaker.batch;
         update(delta);
         batch.begin();
-        batch.draw(img, bauble.getPosition().x, bauble.getPosition().y);
+        batch.draw(baubleImg, bauble.getPosition().x, bauble.getPosition().y);
+        batch.draw(paddleImg, paddle.getPosition().x, paddle.getPosition().y);
         batch.end();
     }	
 	
