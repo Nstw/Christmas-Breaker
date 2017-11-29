@@ -8,18 +8,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen extends ScreenAdapter{
 	private ChristmasBreaker christmasBreaker;
-	private int x;
-	private int y;
-	
+	private Bauble bauble;
 	private Texture img;
 	public GameScreen(ChristmasBreaker christmasBreaker) {
 		this.christmasBreaker = christmasBreaker;
 		img = new Texture("bauble.png");
-		x =100;
-		y = 100;
+		bauble = new Bauble(100,50);
 	}
 	private void update(float delta) {
-		x+=5;
+		bauble.update(delta);
 	}
     @Override
     public void render(float delta) {
@@ -28,7 +25,7 @@ public class GameScreen extends ScreenAdapter{
         SpriteBatch batch = christmasBreaker.batch;
         update(delta);
         batch.begin();
-        batch.draw(img, x, y);
+        batch.draw(img, bauble.getPosition().x, bauble.getPosition().y);
         batch.end();
     }	
 	
