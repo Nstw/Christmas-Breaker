@@ -1,19 +1,21 @@
 package com.christmas.game;
 
-import java.util.Vector;
-
 import com.badlogic.gdx.math.Vector2;
 
 public class Bauble {
 	private Vector2 position;
 	
-	private int speedY;
-	private int speedX;
+	private int ySpeed;
+	private int xSpeed;
 	
-	public Bauble(int x, int y) { //Vector2
+	private World world;
+	
+	public Bauble(int x, int y, World world) {
 		position = new Vector2(x,y);
-		speedX = 5;
-		speedY = 5;
+		xSpeed = 3;
+		ySpeed = 3;
+		
+		this.world = world;				
 	}
 
 	public Vector2 getPosition() {
@@ -21,33 +23,37 @@ public class Bauble {
 	}
 	
 	public void update(float delta) {
-		position.x += speedX;
-		position.y += speedY;
+		position.x += xSpeed;
+		position.y += ySpeed;		
 		
 		checkIsHitBorders();
+		isHitPaddle();
 	}
 	
 	public void isHitPaddle() {
-		position.x -= (speedX * -1);
-		speedY *= -1;
-		
+		if( ( (this.position.y <= (world.getPaddle().getPosition().y + 2)) && (this.position.y >= (world.getPaddle().getPosition().y -2)) ) &&  
+			(this.position.x >= (world.getPaddle().getPosition().x)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
+				position.x -= xSpeed * (-1);
+				ySpeed *= -1;
+		}
+	}
+	
+	public void isHitReindeer() {
+				
 	}
 	
 	public void checkIsHitBorders() {
-		if(position.x >= 800 || position.x <= 0) {
-			speedX *= -1;
+		if(position.x <= 0) {
+			position.x = 0;
+			xSpeed *= -1;
+		}
+		if(position.x >= 800) {
+			position.x = 800;
+			xSpeed *= -1;
 		}
 		if(position.y >= 600) {
-			speedY *= -1;
+			position.y = 600;
+			ySpeed *= -1;
 		}
 	}	
-	/*
-	public void checkIsHitPaddle() {
-		if((Math.abs(posXpaddle - this.position.x) <= 40 && Math.abs(posYpaddle - this.position.y) <= 40)) {
-			speedX *= -1;
-			speedY *= -1;
-		}
-		
-	}
-	*/
 }

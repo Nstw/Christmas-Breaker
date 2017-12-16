@@ -8,5 +8,21 @@ public class World {
 	World(ChristmasBreaker christmasBreaker){
 		this.christmasBreaker = christmasBreaker;
 		
+		bauble = new Bauble(350, 70, this);
+		paddle = new Paddle(300, 20);
 	}
+	
+	Bauble getBauble() {
+		return bauble;
+	}
+	
+	Paddle getPaddle() {
+		return paddle;
+	}
+
+	public void update(float delta) {
+        bauble.update(delta);
+        paddle.update(delta);       
+        
+    }
 }

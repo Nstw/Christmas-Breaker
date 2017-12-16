@@ -8,8 +8,7 @@ public class Paddle {
 	private Vector2 position;
 	
 	public Paddle(int x, int y) {
-		position = new Vector2(x, y);
-		
+		position = new Vector2(x, y);		
 	}
 	
 	public Vector2 getPosition() {
@@ -22,6 +21,6 @@ public class Paddle {
         }
         if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
             position.x += 10;
-        }
+        }        
 	}	
 }
