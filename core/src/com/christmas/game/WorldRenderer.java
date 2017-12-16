@@ -31,11 +31,11 @@ public class WorldRenderer {
 		Vector2 posBauble = world.getBauble().getPosition();
 		Vector2 posPaddle = world.getPaddle().getPosition();
 		
+		blockRenderer.render();
+		
 		batch.begin();
 		batch.draw(baubleImg, posBauble.x, posBauble.y);
         batch.draw(paddleImg, posPaddle.x, posPaddle.y);
-        batch.end();
-        
-        blockRenderer.render();
+        batch.end();   
 	}
 }

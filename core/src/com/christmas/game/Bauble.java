@@ -28,6 +28,7 @@ public class Bauble {
 		
 		checkIsHitBorders();
 		isHitPaddle();
+		isHitBlock();
 	}
 	
 	public void isHitPaddle() {
@@ -39,7 +40,10 @@ public class Bauble {
 	}
 	
 	public void isHitBlock() {
-				
+		Block block = world.getBlock();
+		if(block.hasDotAt(getRow(), getColumn())) {
+			block.removeDotAt(getRow(), getColumn());			
+		}
 	}
 	
 	public void checkIsHitBorders() {
@@ -56,4 +60,12 @@ public class Bauble {
 			ySpeed *= -1;
 		}
 	}	
+	
+	private int getRow() {
+        return ((int)position.y) / WorldRenderer.BLOCK_SIZE; 
+	}
+	
+	private int getColumn() {
+        return ((int)position.x) / WorldRenderer.BLOCK_SIZE; 
+	}
 }

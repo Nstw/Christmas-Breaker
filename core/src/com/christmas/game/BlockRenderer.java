@@ -23,7 +23,7 @@ public class BlockRenderer {
                         (r * WorldRenderer.BLOCK_SIZE) - WorldRenderer.BLOCK_SIZE;
  
                 if(block.hasDotAt(r, c)) {
-                    batch.draw(reindeerImg, x, y);
+                    batch.draw(reindeerImg, x+180, y-50);
                 }
             }
         }
