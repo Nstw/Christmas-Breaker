@@ -1,7 +1,6 @@
 package com.christmas.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,12 +8,12 @@ public class WorldRenderer {
 	private SpriteBatch batch;
 	private ChristmasBreaker christmasBreaker;
 	private World world;
+	private BlockRenderer blockRenderer;
 	
 	private Texture baubleImg;
 	private Texture paddleImg;
 	
-	private Sprite paddleSprite;
-	private Sprite baubleSprite;
+	public static final int BLOCK_SIZE = 70;
 	
 	public WorldRenderer(ChristmasBreaker christmasBreaker, World world) {
 	    this.christmasBreaker = christmasBreaker;
@@ -22,12 +21,9 @@ public class WorldRenderer {
 	    this.world = world;
 	    
 	    baubleImg = new Texture("bauble.png");
-	    baubleSprite = new Sprite(baubleImg);
-		baubleSprite.setPosition(350, 70);
-		
 	    paddleImg = new Texture("paddle.png");
-	    paddleSprite = new Sprite(paddleImg);
-		paddleSprite.setPosition(300, 20);
+	    
+	    blockRenderer = new BlockRenderer(christmasBreaker.batch, world.getBlock());
 	}
 	
 	public void render(float delta) {
@@ -36,11 +32,10 @@ public class WorldRenderer {
 		Vector2 posPaddle = world.getPaddle().getPosition();
 		
 		batch.begin();
-		baubleSprite.setPosition(posBauble.x, posBauble.y);
-        baubleSprite.draw(batch);
-        
-        paddleSprite.setPosition(posPaddle.x, posPaddle.y);
-        paddleSprite.draw(batch);
+		batch.draw(baubleImg, posBauble.x, posBauble.y);
+        batch.draw(paddleImg, posPaddle.x, posPaddle.y);
         batch.end();
+        
+        blockRenderer.render();
 	}
 }

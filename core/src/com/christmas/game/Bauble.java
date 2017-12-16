@@ -38,7 +38,7 @@ public class Bauble {
 		}
 	}
 	
-	public void isHitReindeer() {
+	public void isHitBlock() {
 				
 	}
 	

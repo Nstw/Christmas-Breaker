@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ChristmasBreaker extends Game {
+    public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+	
 	public SpriteBatch batch;	
 	
 	@Override
