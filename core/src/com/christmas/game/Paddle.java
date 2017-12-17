@@ -22,5 +22,6 @@ public class Paddle {
         if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
             position.x += 10;
         }        
+        //System.out.println("Position of Paddle :"+position.x);
 	}	
 }

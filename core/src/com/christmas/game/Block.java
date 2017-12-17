@@ -1,7 +1,7 @@
 package com.christmas.game;
 
 public class Block {
-	private String[] MAP = new String [] {
+	public String[] MAP = new String [] {
             "......",
             "......",
             "......",

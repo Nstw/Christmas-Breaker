@@ -1,5 +1,6 @@
 package com.christmas.game;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bauble {
@@ -29,22 +30,7 @@ public class Bauble {
 		checkIsHitBorders();
 		isHitPaddle();
 		isHitBlock();
-	}
-	
-	public void isHitPaddle() {
-		if( ( (this.position.y <= (world.getPaddle().getPosition().y + 2)) && (this.position.y >= (world.getPaddle().getPosition().y -2)) ) &&  
-			(this.position.x >= (world.getPaddle().getPosition().x)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
-				position.x -= xSpeed * (-1);
-				ySpeed *= -1;
-		}
-	}
-	
-	public void isHitBlock() {
-		Block block = world.getBlock();
-		if(block.hasDotAt(getRow(), getColumn())) {
-			block.removeDotAt(getRow(), getColumn());			
-		}
-	}
+	}	
 	
 	public void checkIsHitBorders() {
 		if(position.x <= 0) {
@@ -59,13 +45,33 @@ public class Bauble {
 			position.y = 600;
 			ySpeed *= -1;
 		}
-	}	
-	
-	private int getRow() {
-        return ((int)position.y) / WorldRenderer.BLOCK_SIZE; 
 	}
 	
-	private int getColumn() {
-        return ((int)position.x) / WorldRenderer.BLOCK_SIZE; 
+	public void isHitPaddle() {
+		if( ( (this.position.y <= (world.getPaddle().getPosition().y + 2)) && (this.position.y >= (world.getPaddle().getPosition().y -2)) ) &&  
+			(this.position.x >= (world.getPaddle().getPosition().x)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
+				position.x -= xSpeed * (-1);
+				ySpeed *= -1;
+		}
+	}
+	
+	public void isHitBlock() {
+		Block block = world.getBlock();
+		for(int r = 0; r < block.getHeight(); r++) {
+			for(int c = 0; c < block.getWidth(); c++) {
+				if(block.hasDotAt(r, c)) {
+					int x = c * WorldRenderer.BLOCK_SIZE + 180;
+					int y = ChristmasBreaker.HEIGHT - (r * WorldRenderer.BLOCK_SIZE) - WorldRenderer.BLOCK_SIZE - 50;
+				
+					Rectangle rect = new Rectangle(x, y, WorldRenderer.BLOCK_SIZE, WorldRenderer.BLOCK_SIZE);
+                    Rectangle ballRect = new Rectangle(position.x, position.y, 65, 65);
+                    Rectangle blockRect = rect;
+                    
+                    if(ballRect.overlaps(blockRect)) {
+                    	block.removeDotAt(r, c);
+                    }
+				}
+			}
+		}
 	}
 }
