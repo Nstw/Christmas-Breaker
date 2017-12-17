@@ -70,7 +70,7 @@ public class Bauble {
 	
 	public void isHitPaddle() {
 		if( ( (this.position.y <= (world.getPaddle().getPosition().y + 2)) && (this.position.y >= (world.getPaddle().getPosition().y -2)) ) &&  
-			(this.position.x >= (world.getPaddle().getPosition().x - 30)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
+			(this.position.x >= (world.getPaddle().getPosition().x - 40)) && (this.position.x <= (world.getPaddle().getPosition().x + 120)) ){
 				position.x -= xSpeed * (-1);
 				ySpeed *= -1;
 		}

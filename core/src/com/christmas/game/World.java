@@ -1,5 +1,8 @@
 package com.christmas.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 public class World {
 	private ChristmasBreaker christmasBreaker;
 	private Bauble bauble;
@@ -9,7 +12,12 @@ public class World {
 	public int score;
 	public int totalBlock;
 	
+	Sound sound;
+	
 	World(ChristmasBreaker christmasBreaker){
+		sound = Gdx.audio.newSound(Gdx.files.internal("song.mp3"));
+		sound.play(1.0f);
+		
 		this.christmasBreaker = christmasBreaker;
 		
 		bauble = new Bauble(350, 70, this);
@@ -51,7 +59,9 @@ public class World {
 		if(totalBlock > 0) {
 			bauble.update(delta);
 			paddle.update(delta);
+		}        
+		else {
+			sound.stop();
 		}
-        
     }
 }
