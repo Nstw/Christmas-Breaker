@@ -49,7 +49,7 @@ public class Bauble {
 	
 	public void isHitPaddle() {
 		if( ( (this.position.y <= (world.getPaddle().getPosition().y + 2)) && (this.position.y >= (world.getPaddle().getPosition().y -2)) ) &&  
-			(this.position.x >= (world.getPaddle().getPosition().x)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
+			(this.position.x >= (world.getPaddle().getPosition().x - 30)) && (this.position.x <= (world.getPaddle().getPosition().x + 128)) ){
 				position.x -= xSpeed * (-1);
 				ySpeed *= -1;
 		}
@@ -63,12 +63,20 @@ public class Bauble {
 					int x = c * WorldRenderer.BLOCK_SIZE + 180;
 					int y = ChristmasBreaker.HEIGHT - (r * WorldRenderer.BLOCK_SIZE) - WorldRenderer.BLOCK_SIZE - 50;
 				
-					Rectangle rect = new Rectangle(x, y, WorldRenderer.BLOCK_SIZE, WorldRenderer.BLOCK_SIZE);
-                    Rectangle ballRect = new Rectangle(position.x, position.y, 65, 65);
+					Rectangle rect = new Rectangle(x, y, WorldRenderer.BLOCK_SIZE - 20, WorldRenderer.BLOCK_SIZE - 20);
+                    Rectangle ballRect = new Rectangle(position.x, position.y, 20, 20);
                     Rectangle blockRect = rect;
                     
                     if(ballRect.overlaps(blockRect)) {
                     	block.removeDotAt(r, c);
+                    	
+                    	if(position.x + 19 <= blockRect.x || position.x + 1 >= blockRect.x + blockRect.width) {
+                    		xSpeed *= -1;
+                    	}
+                    	else {
+                    		ySpeed *= -1;
+                    	}                    	
+                    	break;
                     }
 				}
 			}
