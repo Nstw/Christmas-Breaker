@@ -12,6 +12,8 @@ public class World {
 	public int score;
 	public int totalBlock;
 	
+	public boolean ballFall;
+	
 	Sound sound;
 	
 	World(ChristmasBreaker christmasBreaker){
@@ -27,6 +29,8 @@ public class World {
 		score = 0;
 		totalBlock = 24;
 		regisHitBlock();
+		
+		ballFall = false;
 	}
 	
 	Bauble getBauble() {
@@ -56,7 +60,7 @@ public class World {
     }
 
 	public void update(float delta) {
-		if(totalBlock > 0) {
+		if(totalBlock > 0 && (ballFall == false)) {
 			bauble.update(delta);
 			paddle.update(delta);
 		}        

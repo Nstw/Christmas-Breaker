@@ -66,6 +66,9 @@ public class Bauble {
 			position.y = 600;
 			ySpeed *= -1;
 		}
+		if(position.y < -100) {
+			world.ballFall = true;
+		}
 	}
 	
 	public void isHitPaddle() {
@@ -91,12 +94,10 @@ public class Bauble {
                     if(ballRect.overlaps(blockRect)) {
                     	block.removeDotAt(r, c);
                     	notifyHitBlock();
-                    	//world.score += 1;
                     	
                     	if(position.x + 19 <= blockRect.x || position.x + 1 >= blockRect.x + blockRect.width) {
                     		xSpeed *= -1;
-                    	}
-                    	else {
+                    	} else {
                     		ySpeed *= -1;
                     	}                    	
                     	break;

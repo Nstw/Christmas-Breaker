@@ -13,6 +13,7 @@ public class WorldRenderer {
 	
 	private Texture baubleImg;
 	private Texture paddleImg;
+	private Texture backgroundImg;
 	
 	private BitmapFont font;
 	
@@ -25,6 +26,7 @@ public class WorldRenderer {
 	    
 	    baubleImg = new Texture("bauble.png");
 	    paddleImg = new Texture("paddle.png");
+	    backgroundImg = new Texture("background.png");
 	    
 	    blockRenderer = new BlockRenderer(christmasBreaker.batch, world.getBlock());
 	    
@@ -36,12 +38,13 @@ public class WorldRenderer {
 		Vector2 posBauble = world.getBauble().getPosition();
 		Vector2 posPaddle = world.getPaddle().getPosition();
 		
-		blockRenderer.render();
-		
 		batch.begin();
+		batch.draw(backgroundImg, 0, 0);
 		batch.draw(baubleImg, posBauble.x, posBauble.y);
         batch.draw(paddleImg, posPaddle.x, posPaddle.y);
         font.draw(batch, "Score : " + world.getScore(), 700, 570);
         batch.end();   
+        
+        blockRenderer.render();
 	}
 }
