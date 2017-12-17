@@ -21,6 +21,12 @@ public class Paddle {
         }
         if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
             position.x += 10;
-        }   
+        }
+        if(Gdx.input.isKeyPressed(Keys.UP)) {
+            position.y += 0.2;
+        }
+        if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+            position.y -= 0.2;
+        }
 	}	
 }

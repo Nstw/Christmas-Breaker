@@ -1,6 +1,7 @@
 package com.christmas.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,6 +14,8 @@ public class WorldRenderer {
 	private Texture baubleImg;
 	private Texture paddleImg;
 	
+	private BitmapFont font;
+	
 	public static final int BLOCK_SIZE = 70;
 	
 	public WorldRenderer(ChristmasBreaker christmasBreaker, World world) {
@@ -24,6 +27,8 @@ public class WorldRenderer {
 	    paddleImg = new Texture("paddle.png");
 	    
 	    blockRenderer = new BlockRenderer(christmasBreaker.batch, world.getBlock());
+	    
+	    font = new BitmapFont();
 	}
 	
 	public void render(float delta) {
@@ -36,6 +41,7 @@ public class WorldRenderer {
 		batch.begin();
 		batch.draw(baubleImg, posBauble.x, posBauble.y);
         batch.draw(paddleImg, posPaddle.x, posPaddle.y);
+        font.draw(batch, "Score : " + world.getScore(), 700, 570);
         batch.end();   
 	}
 }

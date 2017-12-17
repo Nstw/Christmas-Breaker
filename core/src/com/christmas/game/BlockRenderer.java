@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class BlockRenderer {	
 	private Block block;
     private SpriteBatch batch;
+    
     private Texture reindeerImg;
     
     public BlockRenderer(SpriteBatch batch, Block block) {

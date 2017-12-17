@@ -1,5 +1,8 @@
 package com.christmas.game;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,17 +14,35 @@ public class Bauble {
 	
 	private World world;
 	
+	public interface HitBlock {
+        void notifyHitBlock();			
+    }
+	
+	private List<HitBlock> list;
+	
 	public Bauble(int x, int y, World world) {
 		position = new Vector2(x,y);
 		xSpeed = 3;
-		ySpeed = 3;
+		ySpeed = 4;
 		
-		this.world = world;				
+		this.world = world;		
+		
+		list = new LinkedList<HitBlock>();
+	}
+	
+	public void regisHitBlock(HitBlock l) {
+        list.add(l);
+	}
+ 
+	private void notifyHitBlock() {
+		for(HitBlock l : list) {
+            l.notifyHitBlock();
+		}
 	}
 
 	public Vector2 getPosition() {
 		return position;
-	}
+	}	
 	
 	public void update(float delta) {
 		position.x += xSpeed;
@@ -69,6 +90,8 @@ public class Bauble {
                     
                     if(ballRect.overlaps(blockRect)) {
                     	block.removeDotAt(r, c);
+                    	notifyHitBlock();
+                    	//world.score += 1;
                     	
                     	if(position.x + 19 <= blockRect.x || position.x + 1 >= blockRect.x + blockRect.width) {
                     		xSpeed *= -1;
