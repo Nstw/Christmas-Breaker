@@ -58,12 +58,12 @@ public class Bauble {
 			position.x = 0;
 			xSpeed *= -1;
 		}
-		if(position.x >= 800) {
-			position.x = 800;
+		if(position.x >= 760) {
+			position.x = 760;
 			xSpeed *= -1;
 		}
-		if(position.y >= 600) {
-			position.y = 600;
+		if(position.y >= 580) {
+			position.y = 580;
 			ySpeed *= -1;
 		}
 		if(position.y < -100) {

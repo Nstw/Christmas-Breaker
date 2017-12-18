@@ -63,7 +63,7 @@ public class World {
 		if(totalBlock > 0 && (ballFall == false)) {
 			bauble.update(delta);
 			paddle.update(delta);
-		}        
+		}      
 		else {
 			sound.stop();
 		}
